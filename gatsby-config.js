@@ -5,6 +5,34 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+    `gatsby-source-firestore`,
+    {
+      resolve: `gatsby-source-firestore`,
+      options: {
+        credential: require(`./firebase.json`),
+        types: [
+          {
+            type: `Movies`,
+            collection: `movies`,
+            map: doc => ({
+              title: doc.title,
+              description: doc.description,
+              year: doc.year,
+              production: doc.production,
+              genres___NODE: doc.genres.id,
+            }),
+          },
+          {
+            type: `Genres`,
+            collection: `genres`,
+            map: doc => ({
+              genre: doc.genre,
+              // movies___NODE: doc.books.map(movies => movies.id),
+            }),
+          },
+        ],
+      },
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
