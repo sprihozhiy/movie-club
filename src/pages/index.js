@@ -1,20 +1,51 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import MovieItem from "../components/MovieItem"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people!</h1>
-    <p>I am going to build something great!</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+const IndexPage = props => {
+  // console.log(props)
+  return (
+    <Layout>
+      <SEO title="Movie Club - The Best Place To Choose A Movie." />
+      {props.data.allMovies.edges.map(edge => {
+        return (
+          <MovieItem key={edge.node.id}>
+            <h2>{edge.node.title}</h2>
+            <h4>
+              <span>Genre: {edge.node.genres.genre}</span> -{" "}
+              <span>Year: {edge.node.year}</span>
+            </h4>
+            <hr />
+            <p>{edge.node.description}</p>
+            <p>Produced by: {edge.node.production}</p>
+            <Link to={`/movie/${edge.node.id}`}>Reviews & Comments</Link>
+          </MovieItem>
+        )
+      })}
+    </Layout>
+  )
+}
+
+export const query = graphql`
+  {
+    allMovies {
+      edges {
+        node {
+          title
+          year
+          production
+          id
+          genres {
+            genre
+          }
+          description
+        }
+      }
+    }
+  }
+`
 
 export default IndexPage

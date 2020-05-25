@@ -1,7 +1,36 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+const path = require("path")
 
-// You can delete this file if you're not using it
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
+  const movieTemplate = path.resolve("./src/templates/movieTemplate.js")
+
+  return graphql(`
+    {
+      allMovies {
+        edges {
+          node {
+            title
+            year
+            production
+            id
+            genres {
+              genre
+            }
+            description
+          }
+        }
+      }
+    }
+  `).then(result => {
+    if (result.errors) {
+      throw result.errors
+    }
+    result.data.allMovies.edges.forEach(movie => {
+      createPage({
+        path: `/movie/${movie.node.id}`,
+        component: movieTemplate,
+        context: movie.node,
+      })
+    })
+  })
+}
