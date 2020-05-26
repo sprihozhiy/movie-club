@@ -4,6 +4,11 @@ import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import MovieItem from "../components/MovieItem"
+import styled from "styled-components"
+
+const LinkButton = styled.div`
+  text-align: right;
+`
 
 const IndexPage = props => {
   // console.log(props)
@@ -12,16 +17,18 @@ const IndexPage = props => {
       <SEO title="Movie Club - The Best Place To Choose A Movie." />
       {props.data.allMovies.edges.map(edge => {
         return (
-          <MovieItem key={edge.node.id}>
-            <h2>{edge.node.title}</h2>
-            <h4>
-              <span>Genre: {edge.node.genres.genre}</span> -{" "}
-              <span>Year: {edge.node.year}</span>
-            </h4>
-            <hr />
-            <p>{edge.node.description}</p>
-            <p>Produced by: {edge.node.production}</p>
-            <Link to={`/movie/${edge.node.id}`}>Reviews & Comments</Link>
+          <MovieItem
+            key={edge.node.id}
+            movieTitle={edge.node.title}
+            movieGenre={edge.node.genres.genre}
+            movieYear={edge.node.year}
+            movieDescription={edge.node.description}
+            movieProduction={edge.node.production}
+            movieImage={edge.node.image}
+          >
+            <LinkButton>
+              <Link to={`/movie/${edge.node.id}`}>Reviews & Comments</Link>
+            </LinkButton>
           </MovieItem>
         )
       })}
@@ -42,6 +49,7 @@ export const query = graphql`
             genre
           }
           description
+          image
         }
       }
     }

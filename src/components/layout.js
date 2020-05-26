@@ -37,7 +37,16 @@ const Layout = ({ children }) => {
         <footer>
           © {new Date().getFullYear()}, All Rights Reserved
           {` `}
-          <a href="https://www.serhii.ca">Movie Club</a>
+          <a
+            style={{
+              textDecoration: `none`,
+              color: `firebrick`,
+              fontWeight: `700`,
+            }}
+            href="https://www.serhii.ca"
+          >
+            Movie Club
+          </a>
         </footer>
       </div>
     </>

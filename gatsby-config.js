@@ -20,6 +20,7 @@ module.exports = {
               year: doc.year,
               production: doc.production,
               genres___NODE: doc.genres.id,
+              image: doc.image,
             }),
           },
           {

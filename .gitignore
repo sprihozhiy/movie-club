@@ -69,4 +69,4 @@ yarn-error.log
 .yarn-integrity
 
 # Firebase API
-firebase.json
+./firebase.json
