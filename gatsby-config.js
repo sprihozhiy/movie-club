@@ -5,7 +5,6 @@ module.exports = {
     author: `@serhiica`,
   },
   plugins: [
-    `gatsby-source-firestore`,
     {
       resolve: `gatsby-source-firestore`,
       options: {
@@ -55,6 +54,13 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-plugin-remote-images`,
+      options: {
+        nodeType: "Movies",
+        imagePath: "image",
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

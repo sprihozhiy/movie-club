@@ -12,7 +12,7 @@ const MovieTemplate = props => {
         movieYear={props.pageContext.year}
         movieDescription={props.pageContext.description}
         movieProduction={props.pageContext.production}
-        movieImage={props.pageContext.image}
+        movieImage={props.pageContext.localImage.publicURL}
       />
     </Layout>
   )

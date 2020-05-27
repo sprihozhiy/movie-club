@@ -24,7 +24,7 @@ const IndexPage = props => {
             movieYear={edge.node.year}
             movieDescription={edge.node.description}
             movieProduction={edge.node.production}
-            movieImage={edge.node.image}
+            movieImage={edge.node.localImage.publicURL}
           >
             <LinkButton>
               <Link to={`/movie/${edge.node.id}`}>Reviews & Comments</Link>
@@ -49,7 +49,9 @@ export const query = graphql`
             genre
           }
           description
-          image
+          localImage {
+            publicURL
+          }
         }
       }
     }

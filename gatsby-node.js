@@ -17,7 +17,9 @@ exports.createPages = ({ graphql, actions }) => {
               genre
             }
             description
-            image
+            localImage {
+              publicURL
+            }
           }
         }
       }
