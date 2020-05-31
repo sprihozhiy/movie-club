@@ -70,3 +70,4 @@ yarn-error.log
 
 # Firebase API
 ./firebase.json
+./components/Firebase/config.js
